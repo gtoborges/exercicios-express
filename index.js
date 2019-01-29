@@ -3,6 +3,16 @@ const app = express()
 const bodyParser = require('body-parser')
 
 const saudacao = require('./saudacaoMid')
+const usuarioApi = require('./api/usuario')
+
+
+//Primeira forma de realizar a comunicação com módulos (olhar ./api/usuario)
+app.post('/usuario', usuarioApi.salvar)
+app.get('/usuario', usuarioApi.obter)
+
+//Segunda forma de fazer a comunicação com os módulos (olhar ./api/produto)
+const produtoApi = require('./api/produto')
+produtoApi(app, 'com param!')
 
 app.use(bodyParser.text())
 app.use(bodyParser.json())
